@@ -46,7 +46,7 @@ select(diabetes_prediction_dataset_csv_1_, -c(gender, diabetes,HbA1c_level ))
 
 ```
 
-### Use mutate() 
+### Use mutate()
 
 #### \*Add two new columns to the data set
 
