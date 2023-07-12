@@ -1,0 +1,98 @@
+# Diabetes_Prediction_Dataset
+
+```{r}
+#install.packages("dplyr")
+
+library("dplyr")
+
+library(ggplot2)
+```
+
+```{r}
+diabetes_prediction_dataset_csv_1_
+head(diabetes_prediction_dataset_csv_1_)
+
+```
+
+### Use filter()
+
+##### \*Filter the observations of your dataset based on one or more variable using filter
+
+```{r}
+## Filter for ages less then 40
+filter(diabetes_prediction_dataset_csv_1_, age < 40)
+
+## Filter for no info smoking history
+filter(diabetes_prediction_dataset_csv_1_, is.na(smoking_history))
+
+## Filter BMI
+filter(diabetes_prediction_dataset_csv_1_, between(bmi, 50, 70))
+
+
+```
+
+### Use select()
+
+#### \*Create a smaller dataset with a subset of variables using select()
+
+```{r}
+
+select(diabetes_prediction_dataset_csv_1_, age, smoking_history, bmi)
+
+# select columns from age to bmi
+select(diabetes_prediction_dataset_csv_1_, age:bmi)
+
+select(diabetes_prediction_dataset_csv_1_, -c(gender, diabetes,HbA1c_level ))
+
+```
+
+### Use mutate() 
+
+#### \*Add two new columns to the data set
+
+```{r}
+#smaller data set 
+diabetes_prediction_dataset_csv_1__small <- select
+(diabetes_prediction_dataset_csv_1_, age, bmi, blood_glucose_level,HbA1c_level, diabetes)
+
+diabetes_prediction_dataset_csv_1__small
+
+# first mutate
+mutate(diabetes_prediction_dataset_csv_1__small, Average_blood_glucose = (HbA1c_level * 35.6)-77.3)
+
+# second mutate 
+mutate(diabetes_prediction_dataset_csv_1__small, diabetes_age = mean(age, na.rm = T), .by = diabetes)
+
+
+```
+
+```         
+```
+
+### Use summarize()
+
+##### \*create a data table of grouped summaries on at least one numeric variable by at least one categorical variable using summarize()
+
+```{r}
+summarize(diabetes_prediction_dataset_csv_1_,
+          mean_age = mean(age, na.rm = T))
+
+summarize(diabetes_prediction_dataset_csv_1_,
+          mean_age = mean(age, na.rm = T),
+          .by = gender)
+
+summarize(diabetes_prediction_dataset_csv_1_,
+          mean_bmi = mean(bmi, na.rm = T),
+          count = n(),
+          .by = c(diabetes))
+```
+
+#### Use arrange()
+
+##### \*reorder a data table of your choice by one or more variables using arrange()
+
+```{r}
+arrange(diabetes_prediction_dataset_csv_1_, desc(bmi))
+
+arrange(diabetes_prediction_dataset_csv_1_, bmi, diabetes)
+```
