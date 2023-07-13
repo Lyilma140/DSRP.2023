@@ -95,4 +95,13 @@ summarize(diabetes_prediction_dataset_csv_1_,
 arrange(diabetes_prediction_dataset_csv_1_, desc(bmi))
 
 arrange(diabetes_prediction_dataset_csv_1_, bmi, diabetes)
+
+# line plot 
+ggplot(data = diabetes_prediction_dataset_csv_1_, aes(x = bmi, y = diabetes)) +
+  geom_point() +
+  geom_line(stat = "summary", fun = "mean") +
+  labs(title = "BMI effect on diabetes risk")
+       
+
+
 ```
